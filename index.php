@@ -3,7 +3,7 @@
   * wechat php test
   */
 
-define("TOKEN", "1aed2c4b7a8a9b8b0a");
+define("TOKEN", "wechat");
 $wechatObj = new wechatCallbackapiTest();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -32,11 +32,10 @@ class wechatCallbackapiTest
 
     public function responseMsg()
     {
-        //echo "Input something...";
         
         //get post data, May be due to the different environments
 		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-        //echo $postStr;
+        $this->logMessage($postStr);
 
       	
         //extract post data
@@ -62,6 +61,20 @@ class wechatCallbackapiTest
         	echo "";
         	exit;
         }
+    }
+    public function logMessage($postStr)
+    {
+        $mysql = new SaeMysql();
+        
+        $sql = "INSERT  INTO `log` ( `content` , `catagory`  ) VALUES ( '".$postStr."','Event' ) " ;
+        $mysql->runSql( $sql );
+        if( $mysql->errno() != 0 )
+        {
+            die( "Error:" . $mysql->errmsg() );
+        }
+
+        $mysql->closeDb();
+
     }
 		
 	private function checkSignature()
