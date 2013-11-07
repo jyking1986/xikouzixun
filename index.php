@@ -1,6 +1,6 @@
 <?php
 /**
-  * wechat php test
+  * wechat php test tag 1.0.1
   */
 
 define("TOKEN", "wechat");
