@@ -8,8 +8,8 @@ $fileDataName = $_FILES["file"]["name"];
 $ext = pathinfo($fileDataName, PATHINFO_EXTENSION);
 $fileDataName= gen_uuid().".".$ext;
 $dumpdata = file_get_contents($_FILES["file"]["tmp_name"]);
-$dowLoadUrl = $stor->write($domain,$fileDataName,$dumpdata);//用write就行了
-$url = $stor->getUrl($domain,$fileDataName);//如果上传图片的处理地址
+$dowLoadUrl = $stor->write($domain,$fileDataName,$dumpdata);
+$url = $stor->getUrl($domain,$fileDataName);
 echo "上传的文件:";
 echo($url);
 }
